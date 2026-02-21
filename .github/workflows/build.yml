@@ -152,8 +152,11 @@ jobs:
         env:
           args: ${{ steps.generate-args.outputs.args }}
         run: |
-          echo "PATH Variable: $PATH"
-          make ${args}
+         chmod +x build.sh
+         ./build.sh
+         filename=$(find . -name Quick* -printf '%f\n')
+          echo $filename
+          echo "FILENAME=$filename" >> $GITHUB_ENV
 
       - name: "💛 Upload Image"
         uses: actions/upload-artifact@v4
@@ -186,3 +189,10 @@ jobs:
           path: ./${{ env.kernelDir }}/${{ env.OUT_DIR }}/arch/${{ env.ARCH }}/boot/dtbo.img
           if-no-files-found: ignore
           retention-days: 7
+
+
+      - name: Uploading Kernel
+        uses: actions/upload-artifact@v4
+        with:
+          name: QuicksilveR_KernelSU
+          path: ./${{ env.kernelDir }}/${{ env.kernelName }}/${{ env.FILENAME }}
