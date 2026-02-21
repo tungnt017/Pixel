@@ -1,11 +1,11 @@
 [  {
     "kernelSource": {
-      "name": "miku-KernelSU",
-      "repo": "https://github.com/PhamtomK12/kernel_xiaomi_odin",
-      "branch": "TDA",
-      "device": "odin"
+      "name": "lisa-KernelSU",
+      "repo": "https://github.com/PixelExperience-Devices/kernel_xiaomi_lisa",
+      "branch": "thirteen",
+      "device": "lisa"
     },
-    "withKernelSU": true,
+    "withKernelSU": false,
     "toolchains": [
       {
         "repo": "https://android.googlesource.com/platform/prebuilts/gas/linux-x86",
