@@ -142,11 +142,8 @@ jobs:
         env:
           args: ${{ steps.generate-args.outputs.args }}
         run: |
-         chmod +x build.sh
-         ./build.sh
-         filename=$(find . -name Quick* -printf '%f\n')
-          echo $filename
-          echo "FILENAME=$filename" >> $GITHUB_ENV
+          echo "PATH Variable: $PATH"
+          make ${args}
 
       - name: "💛 Upload Image"
         uses: actions/upload-artifact@v4
@@ -176,9 +173,27 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: dtbo.img(${{ env.kernelDevice }}-${{ env.kernelName }}-${{ env.kernelBranch }})
-          path: ./${{ env.kernelDir }}/${{ env.OUT_DIR }}/arch/${{ env.ARCH }}/boot/dtbo.img
+          path: ./${{ env.kernelDir }}/${{ env.OUT_DIR }}/arch/${{ env.ARCH }}/boot/boot.img
           if-no-files-found: ignore
           retention-days: 7
+
+      - name: "❤️ Upload dtbo.img"
+        uses: actions/upload-artifact@v4
+        with:
+          name: dtbo.img(${{ env.kernelDevice }}-${{ env.kernelName }}-${{ env.kernelBranch }})
+          path: ./${{ env.kernelDir }}/${{ env.OUT_DIR }}/arch/${{ env.ARCH }}/*.img
+          if-no-files-found: ignore
+          retention-days: 7
+
+
+      - name: "❤️ Upload dtbo.img"
+        uses: actions/upload-artifact@v4
+        with:
+          name: dtbo.img(${{ env.kernelDevice }}-${{ env.kernelName }}-${{ env.kernelBranch }})
+          path: ./${{ env.kernelDir }}/${{ env.OUT_DIR }}/arch/${{ env.ARCH }}/*/*.img
+          if-no-files-found: ignore
+          retention-days: 7
+
 
 
       - name: Uploading Kernel
