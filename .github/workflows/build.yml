@@ -173,7 +173,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: dtbo.img(${{ env.kernelDevice }}-${{ env.kernelName }}-${{ env.kernelBranch }})
-          path: ./${{ env.kernelDir }}/${{ env.OUT_DIR }}/arch/${{ env.ARCH }}/boot/boot.img
+          path: ./${{ env.kernelDir }}/${{ env.OUT_DIR }}/arch/${{ env.ARCH }}/boot/*.img
           if-no-files-found: ignore
           retention-days: 7
 
